@@ -12,10 +12,7 @@
 
 **Acknowledgments:** Extensive discussion, literature search, empirical analysis, and manuscript structuring were conducted in collaboration with Claude (Anthropic, 2025–2026). The theoretical claims, interpretations, and predictions are those of the author.
 
-**Data sources:**
-- `experiments/encoding_through_loading/v5_data/precal_eval_all.jsonl` (Colab Qwen2.5 0.5B→14B)
-- `data/results/capacity_curve_together.jsonl` (Together/Fireworks 8B→671B, /no_think where required)
-- `scripts/analyze_colab_capacity.py`, `scripts/validate_capacity_ceiling.py`
+**Data and code availability:** Per-token logprob datasets, analysis scripts, and figures are released at [https://github.com/tplund/friction-theory-p2-capacity-scaling](https://github.com/tplund/friction-theory-p2-capacity-scaling) under CC BY 4.0.
 
 ---
 

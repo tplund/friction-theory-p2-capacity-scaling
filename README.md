@@ -77,7 +77,7 @@ If you use this data or analysis, please cite:
 }
 ```
 
-The arXiv preprint URL and Zenodo DOI will be added here when available.
+The arXiv preprint URL will be added here when available.
 
 ## Companion papers
 
