@@ -460,7 +460,7 @@ persistence.
 
 ## 4. Scope note: encoding-battery and encoding-structure findings
 
-Two substantial investigations originally scoped for this paper — the full encoding-battery (matched-friction-under-hysteresis across repetition, surprise, spacing, framing, anchoring, storytelling, chunking) and the encoding-structure × capacity interaction — have been moved to Paper 4 (Lund 2026e) to keep this paper's scope focused on the capacity axis. Paper 4 covers those experiments in the broader cross-substrate-replication context, including the cross-domain habit-formation/dementia parallel, the four pre-registered predictions (P-Kandel, P-Lally, P-Craik-Tulving, P-Rovee-Collier), and the convergence with Kalyuga's expertise-reversal effect. Readers interested in the full empirical test of the encoding-handle predictions should consult Paper 4 directly.
+Three companion papers cover what was originally scoped here. **Paper 4** (Lund 2026e) handles the full encoding-battery (matched-friction-under-hysteresis across repetition, surprise, spacing, framing, anchoring, storytelling, chunking) and the encoding-structure × capacity interaction in the broader cross-substrate-replication context, including the cross-domain habit-formation/dementia parallel and the four pre-registered predictions (P-Kandel, P-Lally, P-Craik-Tulving, P-Rovee-Collier). **Paper 4B** (Lund 2026f) develops a recursive strategy-choice race account of the expertise-reversal effect specifically, distinguishing commitment-cost from reactance as two friction mechanisms. **Paper 6** (Lund 2026h) develops the broader unifying theoretical framework — *matched friction under hysteresis* — which subsumes the encoding handles tested empirically in Papers 4 and 4B alongside eight literature traditions on inverted-U learning optima (Yerkes-Dodson, Vygotsky, Kalyuga, Bjork, Bengio, Roediger-Karpicke, Shannon-Berger). Readers interested in the empirical handles should consult Paper 4; in the expertise-reversal mechanism, Paper 4B; in the unifying theoretical framework, Paper 6.
 
 ---
 
@@ -488,7 +488,7 @@ Beyond the technical caveats in §2.9, one scope boundary applies: we have teste
 
 ### 5.4 Future work
 
-Paper 4 covers the encoding-structure × capacity interaction across classical learning phenomena (Bjork spacing, Kalyuga expertise-reversal, Rozenblit-Keil illusion of explanatory depth, etc.). Three additional predictions follow from the findings here:
+Paper 4 (Lund 2026e) covers the encoding-structure × capacity interaction across classical learning phenomena (Bjork spacing, Rozenblit-Keil illusion of explanatory depth, etc.); Paper 4B (Lund 2026f) covers the expertise-reversal effect specifically through a recursive strategy-choice race account; the broader unifying framework relating these to inverted-U learning optima across eight literature traditions is developed in Paper 6 (Lund 2026h). Three additional predictions follow from the findings here:
 
 - **P26 test on field-endowed substrates.** Paired structural-only vs. structural+elaborative encoding conditions on matched facts in humans should produce larger gains from elaborative manipulation than current LLMs do. A cross-substrate replication design would isolate the per-session axis that biological substrates access and LLMs do not.
 
@@ -563,6 +563,10 @@ Lund, T. (2026b). Friction as the cost of probabilistic computation: A generalis
 Lund, T. (2026d). Friction-guided inference: a free signal that improves any LLM. [Paper 3, this series, in preparation.]
 
 Lund, T. (2026e). Cross-substrate replication of classical learning phenomena on LLM substrate. [Paper 4, this series, in preparation.]
+
+Lund, T. (2026f). A recursive strategy-choice race account of expertise reversal. [Paper 4B, this series, in preparation.]
+
+Lund, T. (2026h). Matched friction under hysteresis: A unifying principle for learning optima. [Paper 6, this series, in preparation.]
 
 McClelland, J. L., McNaughton, B. L. & O'Reilly, R. C. (1995). Why there are complementary learning systems in the hippocampus and neocortex. *Psychological Review*, 102, 419–457.
 
