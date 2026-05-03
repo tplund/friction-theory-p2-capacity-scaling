@@ -556,9 +556,9 @@ Gudibande, A., Wallace, E., Snell, C., Geng, X., Liu, H., Abbeel, P., Levine, S.
 
 Kalyuga, S., Ayres, P., Chandler, P. & Sweller, J. (2003). The expertise reversal effect. *Educational Psychologist*, 38, 23–31.
 
-Lund, T. (2026a). Behavioural Friction Theory: A race-based account of decision cost in human cognition. Zenodo preprint. DOI: 10.5281/zenodo.19462500.
+Lund, T. (2026a). Behavioural Friction Theory: Toward a common currency for behavioural science. Zenodo. DOI: 10.5281/zenodo.19462500. [Paper 0, this series.]
 
-Lund, T. (2026b). Friction as the cost of probabilistic computation: A generalised substrate theory. Target: *Behavioural and Brain Sciences*. [Paper 1, this series.]
+Lund, T. (2026b). Friction as the cost of probabilistic computation: A generalised substrate theory. Zenodo. DOI: 10.5281/zenodo.20012655. Target: *Behavioural and Brain Sciences*. [Paper 1, this series.]
 
 Lund, T. (2026d). Friction-guided inference: a free signal that improves any LLM. [Paper 3, this series, in preparation.]
 
