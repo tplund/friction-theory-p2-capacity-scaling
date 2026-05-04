@@ -2,6 +2,8 @@
 
 **Author:** Tomas Pødenphant Lund
 
+**ORCID:** [0009-0000-4724-2427](https://orcid.org/0009-0000-4724-2427)
+
 **Affiliation:** Independent Research, Aarhus
 
 **Correspondence:** tomas.lund@frictiontheory.org
@@ -12,7 +14,7 @@
 
 **Acknowledgments:** Extensive discussion, literature search, empirical analysis, and manuscript structuring were conducted in collaboration with Claude (Anthropic, 2025–2026). The theoretical claims, interpretations, and predictions are those of the author.
 
-**Data and code availability:** Per-token logprob datasets, analysis scripts, and figures are released at [https://github.com/tplund/friction-theory-p2-capacity-scaling](https://github.com/tplund/friction-theory-p2-capacity-scaling) under CC BY 4.0.
+**Data and code availability:** Per-token logprob datasets, analysis scripts, and figures are released at [https://github.com/tplund/friction-theory-p2-capacity-scaling](https://github.com/tplund/friction-theory-p2-capacity-scaling) under CC BY 4.0. Zenodo deposit: DOI [10.5281/zenodo.20013491](https://doi.org/10.5281/zenodo.20013491).
 
 ---
 
