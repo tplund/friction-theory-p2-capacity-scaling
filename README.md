@@ -64,18 +64,25 @@ The per-token logprob data is the most granular available; CR, entropy, and any 
 
 ## Citation
 
-If you use this data or analysis, please cite:
+Paper 2 is published as a Zenodo preprint. Cite the **concept DOI** (auto-resolves to the latest version):
+
+> Pødenphant Lund, T. (2026). *Capacity Scaling of Encoding-Through-Loading: Application vs. Cloze Asymmetry Across Three Orders of Magnitude*. Zenodo. DOI: [10.5281/zenodo.20013491](https://doi.org/10.5281/zenodo.20013491)
 
 ```bibtex
-@unpublished{lund2026capacity,
-  author = {P{\o}denphant Lund, Tomas},
-  title  = {Capacity Scaling of Encoding-Through-Loading:
-            Application vs. Cloze Asymmetry Across Three Orders of Magnitude},
-  year   = {2026},
-  note   = {Manuscript in preparation. Companion repository:
-            \url{https://github.com/tplund/friction-theory-p2-capacity-scaling}}
+@misc{lund2026capacity,
+  author       = {P{\o}denphant Lund, Tomas},
+  title        = {Capacity Scaling of Encoding-Through-Loading:
+                  Application vs. Cloze Asymmetry Across Three Orders of Magnitude},
+  year         = {2026},
+  publisher    = {Zenodo},
+  doi          = {10.5281/zenodo.20013491},
+  url          = {https://doi.org/10.5281/zenodo.20013491}
 }
 ```
+
+**Version-specific record DOIs:**
+- v1 (2026-05-01): [10.5281/zenodo.20013492](https://doi.org/10.5281/zenodo.20013492)
+- v2 (2026-05-11, latest): [10.5281/zenodo.20127860](https://doi.org/10.5281/zenodo.20127860) — ICL-novelty positioning fixes + pointer to Paper 2B; capacity-scaling substance unchanged
 
 The arXiv preprint URL will be added here when available.
 

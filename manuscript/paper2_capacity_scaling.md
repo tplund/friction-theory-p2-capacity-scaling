@@ -20,13 +20,19 @@
 
 ## 0. Abstract
 
-Large language models solve two differentiable task types on the same underlying knowledge base. **Cloze retrieval** — recovering a fact as presented — saturates early: most models reach ~90% accuracy by 8B parameters. **Application** — chaining multiple facts into a derivation — scales monotonically across three orders of magnitude, from 2% at 0.5B to 85% at 70B. We document this asymmetry on a **single invented knowledge domain ("Zorbetik")** designed specifically to eliminate pretraining-prior confounds, across nine models spanning 0.5B to 671B parameters, using frontloaded in-context learning to expose encoding-to-retrieval dynamics without weight updates. Generalisation to natural knowledge domains is a direct next-step empirical extension of the methodology established here.
+Large language models solve two differentiable task types on the same underlying knowledge base. **Cloze retrieval** — recovering a fact as presented — saturates early: most models reach ~90% accuracy by 8B parameters. **Application** — chaining multiple facts into a derivation — scales monotonically across three orders of magnitude, from 2% at 0.5B to 85% at 70B. We document this asymmetry on a **single invented knowledge domain ("Zorbetik")** designed specifically to eliminate pretraining-prior confounds, across nine models spanning 0.5B to 671B parameters, using frontloaded in-context learning to expose encoding-to-retrieval dynamics without weight updates. Generalisation to natural knowledge domains is a direct next-step empirical extension of the approach applied here.
 
 Three findings follow. **Finding 1**: Application scales monotonically with capacity (Spearman ρ = +1.000 on the Qwen2.5 sub-ladder, n=5, p = 0.0083 one-tailed / 0.0167 two-tailed; cross-family panel ρ = +0.92, n=9, p = 0.0005 two-tailed; slope +40.8 percentage points per decade). Cloze does not. **Finding 2**: The bottleneck migrates with capacity — at 0.5B, retrieval fails; at 14B, retrieval is saturated and 36% of questions show a "retrieval succeeds, derivation fails" pattern. **Finding 3**: Mixture-of-Experts (MoE) models scale on **active** parameters, not total. A 235B MoE with 22B active parameters behaves on application tasks like a 22B dense model (active-parameter projection within 3pp of actual; total-parameter projection off by 33pp).
 
-We also advance a methodological claim: **frontloaded in-context learning (ICL)** — presenting all training facts in the prompt followed by one question, with per-token logprobs captured on the answer — operationally substitutes for fine-tuning in encoding-to-retrieval studies. It is fast (~5 seconds per inference vs. hours for FT), cheap (cents vs. dollars), unified across model families, and produces dense friction data (six statistics per inference). Caveats: ICL is bounded by the context window and is ephemeral to each prompt, so FT remains necessary for large knowledge bases, persistence studies, and route-overwrite experiments.
+Throughout this work we use **frontloaded in-context learning** (ICL; Brown et al. 2020) as the methodological instrument — presenting all 47 training facts in the prompt followed by one question, with per-token logprobs captured on the answer. ICL implements an implicit gradient-descent-like operation in activation space (Dai et al. 2022; Akyürek et al. 2022), so the per-token competing-routes signal on the answer reads the same underlying route-competition that fine-tuning would have crystallised into weights. **For encoding-to-retrieval studies of the kind reported here, we recommend ICL as the operational instrument in place of fine-tuning** when persistence is not required: it is fast (~5 seconds per inference vs. hours for FT), cheap (cents vs. dollars per measurement), unified across model families, and produces dense friction data (six statistics per inference). The recommendation is a methodological position, not a novel technique — ICL itself is well-established. Caveats: ICL is bounded by the context window and is ephemeral to each prompt, so FT remains necessary for large knowledge bases, persistence studies, and route-overwrite experiments. The substrate-mechanistic comparison of ICL with LoRA fine-tuning at multiple training budgets — and the implications for current LLM practice — is developed in the companion paper Paper 2B (Pødenphant Lund 2026X).
 
 **Implications.** Capacity is single-axis but loads task types differentially. Cloze is indexing-bound; application is composition-bound. The three-dimensional friction framework (magnitude, distribution, rhythm) from Paper 1 decomposes the C-axis into corresponding operational handles. Paper 4 systematically tests these handles across classical learning phenomena.
+
+---
+
+## Table of Contents
+
+*[Insert generated Table of Contents here — Word: References → Table of Contents → Automatic Table 1]*
 
 ---
 
@@ -42,7 +48,7 @@ We measure three things simultaneously in a single prompt call: (a) accuracy on 
 
 This paper focuses on the capacity axis. Paper 4 (Lund 2026e) tests encoding-structure (how the same information is organized) × capacity interaction — a series of findings originally planned for this paper but moved to keep scope focused.
 
-**Structure.** §2 reports the empirical capacity-scaling results on the Zorbetik domain, including the application/cloze asymmetry, the bottleneck-migration finding, and the MoE active-vs-total parameter analysis. §3 develops the frontloaded-ICL methodology as a substitute for fine-tuning. §4 notes content moved to Paper 4. §5 discusses implications for the C-dimension framework. §6 concludes.
+**Structure.** §2 reports the empirical capacity-scaling results on the Zorbetik domain, including the application/cloze asymmetry, the bottleneck-migration finding, and the MoE active-vs-total parameter analysis. §3 explains the frontloaded-ICL methodology used in §2 (citing Brown et al. 2020 for the technique, Dai et al. 2022 + Akyürek et al. 2022 for its mechanistic characterisation) and argues for it as the appropriate operational instrument for encoding-retrieval studies of this kind in place of fine-tuning, with substrate-mechanistic comparison deferred to Paper 2B (Pødenphant Lund 2026X). §4 notes content moved to Paper 4. §5 discusses implications for the C-dimension framework. §6 concludes.
 
 ---
 
@@ -209,7 +215,7 @@ the model is at the moment of speaking — leaves a per-token
 signature.
 
 **A complementary verification via fine-tuning.** The ICL-based
-approach developed here observes encoding indirectly — through the
+approach used here observes encoding indirectly — through the
 first-token friction signature left by a single forward pass. A
 fine-tuning counterpart would observe encoding more directly. During
 FT on the same four encoding conditions (VANILLA / CHUNKED /
@@ -373,92 +379,19 @@ substrate-level affective gain controls — would be the first
 artificial systems able to exceed the current elaborative-ceiling.
 
 
-## 3. Frontloaded in-context learning as a fine-tuning substitute
+## 3. Methodological note — frontloaded ICL as fine-tuning substitute
 
-Our encoding-through-loading claims are traditionally tested with
-fine-tuning: train the model on a corpus, then query it. This is
-expensive (hours of GPU time per model × size), destructive (LoRA
-configurations with wrong target-modules zero out performance — see
-our §2.9 caveats), and slow to iterate.
+In-context learning was introduced by Brown et al. (2020) and characterised mechanistically by Dai et al. (2022) and Akyürek et al. (2022) as an implicit gradient-descent-like operation in activation space. Empirical comparisons between ICL and fine-tuning on knowledge-encoding tasks have been documented across deployment-cost dimensions (Soudani et al. 2024; Brown et al. 2020). What we add here is not a new technique but a methodological position: that **for encoding-retrieval studies of the kind reported in §2 — testing how capacity loads task types differentially within a single inference — frontloaded ICL is the appropriate operational instrument in place of fine-tuning** when persistence is not required.
 
-We note here that **for testing encoding-to-retrieval effects within a
-single model, frontloaded in-context learning (ICL) is an operational
-substitute for fine-tuning**. A single prompt of the form
+The capacity-scaling sweep in §2 uses frontloaded ICL as that instrument: a single prompt of the form `[all 47 facts] + [one question]` with per-token logprobs captured on the answer. The per-token CR signal on the answer reads the same underlying route-competition that FT would have crystallised into weights, except it happens in the current forward pass. The methodology is fast (~5 seconds per inference vs. hours for FT), cheap (trivial API cost per measurement), unified across model families, and produces dense friction data.
 
-> `[all training facts] + [one question]`
+For studies asking how long-term knowledge is stored under training-time conditions, fine-tuning remains necessary. Our recommendation is bounded to the encoding-retrieval question this paper addresses, where the question is within-inference encoding-and-retrieval rather than weight-encoding-and-retention.
 
-with per-token logprobs captured on the answer tokens gives direct
-access to the encoding-structure × retrieval-fluidity relationship
-without any weight update. This works because:
+**Scope of the recommendation.** ICL is not equivalent to FT in all respects: it is bounded by the context window (tens of thousands of tokens), ephemeral to each prompt, and adds rather than overwrites pre-training priors. For very large knowledge bases, persistence studies, and route-overwrite experiments, FT remains necessary.
 
-1. **ICL and FT operate on overlapping mechanisms.** Dai et al. (2022)
-   and Akyürek et al. (2022) show that in-context learning implements
-   an implicit gradient-descent-like update in activation space. Our
-   measurement probe (per-token CR on the answer) reads the same
-   underlying route-competition that FT would have crystallised into
-   weights — except it is happening in the current forward pass.
-2. **For retrieval-heavy tasks, ICL often exceeds FT at small scale.**
-   Brown et al. (2020) and Soudani et al. (2024) both document this;
-   our own Colab preliminary calibration confirms the asymmetry (ICL cloze
-   accuracy 56–96% across sizes; LoRA FT of the same facts yielded
-   0% across all sizes in our preliminary calibration setup due to a
-   target-module configuration that excluded the MLP layers where
-   factual knowledge is known to live, Geva et al. 2021).
-3. **Logprobs span the full inference window.** With a single API
-   call we obtain per-token friction signal for the answer phase
-   AND, via the first-5-tokens statistic, an indirect read on how
-   cleanly the frontloaded context integrated — see the §2.8 note on
-   what first-token friction measures.
+**Substrate-mechanism companion.** The claim that ICL operationally substitutes for FT in encoding-retrieval studies survives the empirical test, but with a sharper substrate-mechanistic interpretation: ICL is not merely a faster substitute for FT but an architecturally distinct encoding mode that preserves calibrated friction-signal where any backward-pass training compresses it. The empirical demonstration of this distinction across LoRA-FT budgets from 5 to 100 epochs, the substrate-mechanism account (winning-route amplification under cumulative gradient pressure), and the implications for current LLM practice (hallucination, agentic systems, RAG-vs-FT, hybrid architectures) are developed in the companion paper Paper 2B (Pødenphant Lund 2026X). Readers interested in the substrate-mechanistic distinction between ICL and FT, or in the practical implications for LLM systems built on either mode, should consult Paper 2B.
 
-The frontloaded-ICL methodology is therefore:
-- **Fast:** ~5 seconds per inference vs hours for FT.
-- **Cheap:** trivial API cost per measurement (cents vs dollars).
-- **Unified:** the same probe works across model families and sizes
-  without per-model LoRA configuration.
-- **Dense:** one measurement yields accuracy + 6 friction statistics
-  (mean_cr, std_cr, first5, last5, middle, per_token list) rather
-  than just accuracy.
-
-**A practical consequence: frontloaded-ICL as a hypothesis smoke-test.**
-Because the method runs in seconds at trivial cost, it is effective as a
-first-pass screen for hypotheses about encoding-structure effects before
-committing to the expensive fine-tuning track. In the development of this
-paper itself, we iterated on ten candidate hypotheses about
-encoding-structure × capacity interactions in a single afternoon using
-frontloaded-ICL; the equivalent fine-tuning battery would have taken
-multiple weeks of GPU time and per-model LoRA configuration effort. The
-smoke-test role complements rather than replaces the FT track: it triages
-which hypotheses are worth the FT investment, and it pre-specifies the
-expected direction and magnitude before the FT run is funded. For
-laboratories operating under compute constraints, this methodological
-shift substantially expands the space of testable hypotheses in
-encoding-structure research.
-
-**Caveats and where FT is still necessary.** Frontloaded-ICL is not
-equivalent to FT in all respects:
-
-- **Context-window limit.** FT can encode arbitrarily many facts into
-  weights; ICL is bounded by the context window (tens of thousands of
-  tokens currently). For very large knowledge bases, only FT is
-  viable.
-- **Persistence.** FT produces a permanent model; ICL is ephemeral
-  to each prompt. For studying catastrophic forgetting, interference
-  between training sessions, or retention over time, FT is required.
-- **Route-overwrite vs route-addition.** FT can genuinely *overwrite*
-  prior pathways (e.g., alignment changing pre-training priors);
-  ICL merely *adds* new active routes on top of existing weights.
-  Studies of route-competition between learned-from-corpus and
-  learned-in-context knowledge require both.
-
-For the encoding-structure × capacity experiments reported in Paper 4,
-frontloaded-ICL is the correct instrument: the question is how
-organisation of the same information affects retrieval within a
-single inference, not how long-term storage is affected by
-training-time conditions. We therefore adopt it as the standard
-methodology and recommend it as a general replacement for fine-
-tuning in encoding-retrieval studies that do not require
-persistence.
-
+---
 
 ## 4. Scope note: encoding-battery and encoding-structure findings
 
@@ -470,7 +403,7 @@ Three companion papers cover what was originally scoped here. **Paper 4** (Lund 
 
 ### 5.1 What this paper establishes
 
-Three empirical findings and one methodological contribution anchor the paper:
+Three empirical findings plus a methodological recommendation anchor the paper:
 
 1. **Capacity loads cloze and application differently.** Cloze is indexing-bound and saturates around 8B parameters at ~90% accuracy on this domain. Application is composition-bound and scales monotonically across three orders of magnitude, with no saturation observed up to 70B.
 
@@ -478,7 +411,7 @@ Three empirical findings and one methodological contribution anchor the paper:
 
 3. **MoE scales on active, not total parameters.** For the encoding-through-loading task, per-token active parameters determine effective compute capacity. MoE purchases routing flexibility, not capacity itself.
 
-4. **Frontloaded-ICL substitutes for fine-tuning** in encoding-to-retrieval studies that do not require persistence. The methodology delivers dense per-token friction data at two orders of magnitude lower cost and turnaround than FT.
+4. **Methodological recommendation: frontloaded ICL** (Brown et al. 2020) is the appropriate operational instrument for encoding-to-retrieval studies of this kind in place of fine-tuning, when persistence is not required. We argue this position; we do not introduce the technique. The methodology delivers dense per-token friction data at two orders of magnitude lower cost and turnaround than FT.
 
 ### 5.2 Implications for the C-dimension framework
 
@@ -486,7 +419,7 @@ These findings validate Paper 1's C-dimension as a single axis that loads tasks 
 
 ### 5.3 Limitations
 
-Beyond the technical caveats in §2.9, one scope boundary applies: we have tested a single invented knowledge domain. Zorbetik was constructed to eliminate pretraining-prior confounds, providing clean confound-control at substrate level. Generalisation to natural knowledge domains — where pretraining priors interact with the encoding mechanism as both aid and interference — requires direct empirical testing; the methodology established here provides the operational framework for that testing. The frontloaded-ICL methodology has its own scope boundary: it can only probe encoding-to-retrieval effects within a single inference, not long-term retention. FT is required for any study involving persistence or inter-session interference.
+Beyond the technical caveats in §2.9, one scope boundary applies: we have tested a single invented knowledge domain. Zorbetik was constructed to eliminate pretraining-prior confounds, providing clean confound-control at substrate level. Generalisation to natural knowledge domains — where pretraining priors interact with the encoding mechanism as both aid and interference — requires direct empirical testing; the approach applied here provides the operational framework for that testing. The frontloaded-ICL methodology has its own scope boundary: it can only probe encoding-to-retrieval effects within a single inference, not long-term retention. FT is required for any study involving persistence or inter-session interference.
 
 ### 5.4 Future work
 
@@ -502,7 +435,7 @@ Paper 4 (Lund 2026e) covers the encoding-structure × capacity interaction acros
 
 ## 6. Conclusion
 
-This paper tested Paper 1's C-dimension prediction and the encoding-through-loading mechanism through an in-context learning sweep across nine model sizes spanning three orders of magnitude on an invented knowledge domain. Three primary findings — monotonic application scaling, migrating bottleneck, MoE active-parameter scaling — decompose capacity from a single parameter count into a structured operational quantity. One methodological contribution — frontloaded-ICL as a fine-tuning substitute for encoding studies — opens faster, cheaper, and more generalisable empirical investigation. The results support the framework of Paper 1 and point forward to Paper 4's systematic test of the encoding-structure × capacity interaction across classical learning phenomena.
+This paper tested Paper 1's C-dimension prediction and the encoding-through-loading mechanism through an in-context learning sweep across nine model sizes spanning three orders of magnitude on an invented knowledge domain. Three primary findings — monotonic application scaling, migrating bottleneck, MoE active-parameter scaling — decompose capacity from a single parameter count into a structured operational quantity. One methodological recommendation — adopting frontloaded ICL (Brown et al. 2020) as the operational instrument for encoding-retrieval studies in place of fine-tuning when persistence is not required — opens faster, cheaper, and more generalisable empirical investigation; we argue the position rather than introduce the technique. The results support the framework of Paper 1 and point forward to Paper 4's systematic test of the encoding-structure × capacity interaction across classical learning phenomena.
 
 ---
 
@@ -569,6 +502,8 @@ Lund, T. (2026e). Cross-substrate replication of classical learning phenomena on
 Lund, T. (2026f). A recursive strategy-choice race account of expertise reversal. [Paper 4B, this series, in preparation.]
 
 Lund, T. (2026h). Matched friction under hysteresis: A unifying principle for learning optima. [Paper 6, this series, in preparation.]
+
+Pødenphant Lund, T. (2026X, in preparation). In-Context Learning as Working Memory, Fine-Tuning as Long-Term Memory: A Substrate-Mechanistic Account of LLM Practice. [Paper 2B, this series — substrate-mechanism companion to the present paper.]
 
 McClelland, J. L., McNaughton, B. L. & O'Reilly, R. C. (1995). Why there are complementary learning systems in the hippocampus and neocortex. *Psychological Review*, 102, 419–457.
 

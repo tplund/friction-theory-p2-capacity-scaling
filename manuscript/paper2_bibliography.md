@@ -34,9 +34,15 @@ Lund, T. (2026d). Friction-guided inference: a free signal that improves any LLM
 
 Lund, T. (2026e). Cross-substrate replication of classical learning phenomena on LLM substrate. [Paper 4, this series, in preparation.]
 
+Lund, T. (2026f). A recursive strategy-choice race account of expertise reversal. [Paper 4B, this series, in preparation.]
+
+Lund, T. (2026h). Matched friction under hysteresis: A unifying principle for learning optima. [Paper 6, this series, in preparation.]
+
 McClelland, J. L., McNaughton, B. L. & O'Reilly, R. C. (1995). Why there are complementary learning systems in the hippocampus and neocortex. *Psychological Review*, 102, 419–457.
 
 Paivio, A. (1971). *Imagery and Verbal Processes*. Holt, Rinehart & Winston.
+
+Pødenphant Lund, T. (2026X, in preparation). In-Context Learning as Working Memory, Fine-Tuning as Long-Term Memory: A Substrate-Mechanistic Account of LLM Practice. [Paper 2B, this series — substrate-mechanism companion to the present paper.]
 
 Schaeffer, R., Miranda, B. & Koyejo, S. (2023). Are emergent abilities of large language models a mirage? *NeurIPS 2023*. arXiv:2304.15004.
 
